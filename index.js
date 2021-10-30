@@ -46,12 +46,27 @@ async function run() {
       res.send(cursor);
     });
 
+    // GET my offers
+    app.get("/myOrder/:email", async (req, res) => {
+      const email = req.params.email;
+      const result = await orderCollections.find({ email }).toArray();
+      res.send(result);
+    });
+
     // GET single offer
     app.get("/order/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: ObjectId(id) };
       const result = await offerCollections.findOne(query);
       res.send(result);
+    });
+
+    app.delete("/delOrder/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await orderCollections.deleteOne(query);
+      res.json(result);
+      console.log(result);
     });
   } finally {
     //   await client.close();
