@@ -40,7 +40,7 @@ async function run() {
       console.log(result);
     });
 
-    // GET offers
+    // GET all offers
     app.get("/offers", async (req, res) => {
       const cursor = await offerCollections.find({}).toArray();
       res.send(cursor);
@@ -51,7 +51,7 @@ async function run() {
       res.send(cursor);
     });
 
-    // GET my offers
+    // GET my order
     app.get("/myOrder/:email", async (req, res) => {
       const email = req.params.email;
       const result = await orderCollections.find({ email }).toArray();
