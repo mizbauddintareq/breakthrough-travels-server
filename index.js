@@ -45,6 +45,11 @@ async function run() {
       const cursor = await offerCollections.find({}).toArray();
       res.send(cursor);
     });
+    // GET all order
+    app.get("/allOrders", async (req, res) => {
+      const cursor = await orderCollections.find({}).toArray();
+      res.send(cursor);
+    });
 
     // GET my offers
     app.get("/myOrder/:email", async (req, res) => {
