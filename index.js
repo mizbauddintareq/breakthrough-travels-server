@@ -63,17 +63,13 @@ async function run() {
       const updatedStatus = req.body;
       console.log(updatedStatus);
       const filter = { _id: ObjectId(updateId) };
-      const options = { upsert: true };
+
       const updateDoc = {
         $set: {
           status: updatedStatus.status,
         },
       };
-      const approveStatus = await orderCollections.updateOne(
-        filter,
-        updateDoc,
-        options
-      );
+      const approveStatus = await orderCollections.updateOne(filter, updateDoc);
       res.json(approveStatus);
     });
     // GET single offer
