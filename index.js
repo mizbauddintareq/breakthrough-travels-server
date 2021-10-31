@@ -58,6 +58,24 @@ async function run() {
       res.send(result);
     });
 
+    app.put("/status/:id", async (req, res) => {
+      const updateId = req.params.id;
+      const updatedStatus = req.body;
+      console.log(updatedStatus);
+      const filter = { _id: ObjectId(updateId) };
+      const options = { upsert: true };
+      const updateDoc = {
+        $set: {
+          status: updatedStatus.status,
+        },
+      };
+      const approveStatus = await orderCollections.updateOne(
+        filter,
+        updateDoc,
+        options
+      );
+      res.json(approveStatus);
+    });
     // GET single offer
     app.get("/order/:id", async (req, res) => {
       const id = req.params.id;
